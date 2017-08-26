@@ -1,0 +1,38 @@
+{% extends 'Crawler/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recordlist</title>
+</head>
+<body>
+{% block myhdg %}
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'Crawler:home' %}">Home</a></li>
+      <li><a href="{% url 'Crawler:athletes' %}">Athletes</a></li>
+      <li class="active"><a href="{% url 'Crawler:recordlist' %}">Records</a></li>
+      <li><a href="{% url 'Crawler:ranking' %}">Ranking</a></li>
+      <li><a href="{% url 'Crawler:meet' %}">Meet</a></li>
+      <li><a href="{% url 'Crawler:calender' %}">Calender</a> </li>
+    </ul>
+{% endblock %}
+    {% block content %}
+        {% csrf_token %}
+        <div>
+            <td>
+                <table class="recordList" cellspacing="0" cellpadding="0" border="0" width="400" align="center">
+                <tr class="recordSearchHead">
+                <th width="400" class="recordlist"><h1>RecordList</h1></th>
+                </tr>
+                    {% for recordlist in recordlist %}
+                        <tr class="recordSearch">
+                            <th width="400" class="name"><p><span style="font-weight:normal"><a href="{{ recordlist.id }}">{{ recordlist.recordlist }}</a></span></p></th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% extends 'Crawler/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AthletesSearch</title>
+</head>
+<body>
+{% block myhdg %}
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'Crawler:home' %}">Home</a></li>
+      <li class="active"><a href="{% url 'Crawler:athletes' %}">Athletes</a></li>
+      <li><a href="{% url 'Crawler:recordlist' %}">Records</a></li>
+      <li><a href="{% url 'Crawler:ranking' %}">Ranking</a></li>
+      <li><a href="{% url 'Crawler:meet' %}">Meet</a></li>
+      <li><a href="{% url 'Crawler:calender' %}">Calender</a></li>
+    </ul>
+{% endblock %}
+    {% block content %}
+        <div align="left" >
+            <a href="{% url 'Crawler:athletes' %}">Back Previous Page</a>
+        </div>
+        <div>
+            <td>
+                <table class="athleteList" cellspacing="0" cellpadding="0" border="0" width="400" align="center">
+                <tr class="athleteSearchHead">
+                <th width="245" class="name">Lastname, firstname</th>
+                <th width="100" class="date">Birthdate</th>
+                <th width="55" class="code">Nation</th>
+                </tr>
+                    {% for athletes in athletesList %}
+                        <tr class="athleteSearch">
+                            <th width="245" class="name"><p><span style="font-weight:normal"><a href="{{ athletes.athletes_id }}">{{ athletes.name }}</a></span></p></th>
+                        <th width="100" class="date"><p><span style="font-weight:normal">{{ athletes.birth_year}}</span></p></th>
+                            <th width="55" class="code"><p><span style="font-weight:normal">{{ athletes.nation }}</span></p></th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        <div>
+    {% endblock %}
+</body>
+</html>

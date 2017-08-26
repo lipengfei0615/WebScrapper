@@ -1,0 +1,47 @@
+{% extends 'Crawler/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Participating Nation</title>
+</head>
+<body>
+{% block myhdg %}
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'Crawler:home' %}">Home</a></li>
+      <li><a href="{% url 'Crawler:athletes' %}">Athletes</a></li>
+      <li><a href="{% url 'Crawler:recordlist' %}">Records</a></li>
+      <li><a href="{% url 'Crawler:ranking' %}">Ranking</a></li>
+      <li class="active"><a href="{% url 'Crawler:meet' %}">Meet</a></li>
+      <li><a href="{% url 'Crawler:calender' %}">Calender</a> </li>
+    </ul>
+{% endblock %}
+    {% block content %}
+        <div>
+            <td>
+                <table class="MedalList" cellspacing="0" cellpadding="0" border="0" width="450" align="center">
+                <tr class="medalSearchHead">
+                <th width="150">Club</th>
+                    <th width="100">Nation</th>
+                 <th width="50">Gold</th>
+                <th width="50">Silver</th>
+                <th width="50">Bronze</th>
+                <th width="50">Total</th>
+                </tr>
+                    {% for medal in medal %}
+                        <tr class="medalSearch">
+                            <th width="150" class="club"><p><span style="font-weight:normal">{{ medal.club }}</span></p></th>
+                            <th width="100" class="nation"><p><span style="font-weight:normal">{{ medal.nation }}</span></p></th>
+                            <th width="50" class="gold"><p><span style="font-weight:normal">{{ medal.gold }}</span></p></th>
+                            <th width="50" class="silver"><p><span style="font-weight:normal">{{ medal.silver }}</span></p></th>
+                            <th width="50" class="bronze"><p><span style="font-weight:normal">{{ medal.bronze }}</span></p></th>
+                            <th width="50" class="total"><p><span style="font-weight:normal">{{ medal.total }}</span></p></th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </div>
+    {% endblock %}
+</body>
+</html>

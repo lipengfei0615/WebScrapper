@@ -1,0 +1,53 @@
+{% extends 'Crawler/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calender</title>
+</head>
+<body>
+{% block myhdg %}
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'Crawler:home' %}">Home</a></li>
+      <li><a href="{% url 'Crawler:athletes' %}">Athletes</a></li>
+      <li><a href="{% url 'Crawler:recordlist' %}">Records</a></li>
+      <li><a href="{% url 'Crawler:ranking' %}">Ranking</a></li>
+      <li><a href="{% url 'Crawler:meet' %}">Meet</a></li>
+      <li class="active"><a href="{% url 'Crawler:calender' %}">Calender</a></li>
+    </ul>
+{% endblock %}
+    {% block content %}
+        {% csrf_token %}
+        <div align="center"><h1>Meet Calender( All from now )</h1></div>
+        <div>
+            <td>
+                <table class="calendarList" cellspacing="0" cellpadding="0" border="0" width="1300" align="center">
+                <tr class="calendarSearchHead">
+                <th width="200">MeetName</th>
+                <th width="100">MeetCity</th>
+                <th width="150">EntriesDeadline</th>
+                <th width="50">Timing</th>
+                <th width="100">Organizer</th>
+                <th width="100">HostClub</th>
+                <th width="200">Address</th>
+                <th width="200">Email</th>
+                </tr>
+                    {% for match in match %}
+                        <tr class="calendarSearch">
+                            <th width="200"><p><span style="font-weight:normal">{{ match.meet_name }}</span></p></th>
+                            <th width="100"><p><span style="font-weight:normal">{{ match.meet_city }}</span></p></th>
+                            <th width="150"><p><span style="font-weight:normal">{{ match.entries_deadline }}</span></p></th>
+                            <th width="50"><p><span style="font-weight:normal">{{ match.timing }}</span></p></th>
+                            <th width="100"><p><span style="font-weight:normal">{{ match.organizer }}</span></p></th>
+                            <th width="100"><p><span style="font-weight:normal">{{ match.host_club }}</span></p></th>
+                            <th width="200"><p><span style="font-weight:normal">{{ match.address }}</span></p></th>
+                            <th width="200"><p><span style="font-weight:normal">{{ match.email }}</span></p></th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends 'Crawler/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact us</title>
+</head>
+<body>
+
+{% block content %}
+    <h2 class="text-center">Welcome to contact us!</h2>
+
+    <form method="POST">{% csrf_token %}
+        <div align="left"  class="col-sm-6 form-group">
+        {{ form.as_p }}
+        </div>
+    <div class="row">
+        <div class="col-md-12 form-group">
+          <button class="btn pull" type="submit">Send</button>
+        </div>
+    </div>
+    </form>
+
+    <script>
+        $("button").click(function () {
+            alert("Send email successfully!")
+        });
+    </script>
+{% endblock %}
+</body>
+</html>

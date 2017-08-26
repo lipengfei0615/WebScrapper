@@ -1,0 +1,51 @@
+{% extends 'Crawler/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personalbest</title>
+</head>
+<body>
+{% block myhdg %}
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'Crawler:home' %}">Home</a></li>
+      <li class="active"><a href="{% url 'Crawler:athletes' %}">Athletes</a></li>
+      <li><a href="{% url 'Crawler:recordlist' %}">Records</a></li>
+      <li><a href="{% url 'Crawler:ranking' %}">Ranking</a></li>
+      <li><a href="{% url 'Crawler:meet' %}">Meet</a></li>
+      <li><a href="{% url 'Crawler:calender' %}">Calender</a> </li>
+    </ul>
+{% endblock %}
+    {% block content %}
+        {% csrf_token %}
+        <div align="center"><h2> {{ name }}'s Personal Best Record</h2></div>
+        <div>
+            <td>
+                <table class="athleteList" cellspacing="0" cellpadding="0" border="0" width="1000" align="center">
+                <tr class="athleteSearchHead">
+                <th width="150" class="event">Event</th>
+                <th width="50" class="course">Course</th>
+                <th width="50" class="time">Time</th>
+                <th width="50" class="points">Points</th>
+                <th width="150" class="date">Date</th>
+                 <th width="150" class="city">City</th>
+                <th width="400" class="meet">Meet</th>
+                </tr>
+                    {% for personal in personal_best %}
+                        <tr class="athleteSearch">
+                            <th width="150" class="event"><p><span style="font-weight:normal">{{ personal.event }}</span></p></th>
+                            <th width="50" class="course"><p><span style="font-weight:normal">{{ personal.course }}</span></p></th>
+                            <th width="50" class="time"><p><span style="font-weight:normal">{{ personal.time }}</span></p></th>
+                            <th width="50" class="points"><p><span style="font-weight:normal">{{ personal.points }}</span></p></th>
+                            <th width="150" class="date"><p><span style="font-weight:normal">{{ personal.date }}</span></p></th>
+                            <th width="150" class="city"><p><span style="font-weight:normal">{{ personal.city }}</span></p></th>
+                            <th width="400" class="meet"><p><span style="font-weight:normal">{{ personal.meet }}</span></p></th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        <div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,61 @@
+{% extends 'Crawler/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+{% block myhdg %}
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'Crawler:home' %}">Home</a></li>
+      <li><a href="{% url 'Crawler:athletes' %}">Athletes</a></li>
+      <li><a href="{% url 'Crawler:recordlist' %}">Records</a></li>
+      <li><a href="{% url 'Crawler:ranking' %}">Ranking</a></li>
+      <li><a href="{% url 'Crawler:meet' %}">Meet</a></li>
+      <li><a href="{% url 'Crawler:calender' %}">Calender</a> </li>
+    </ul>
+       {% endblock %}
+{% block content %}
+    {% load staticfiles%}
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top:0px;">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active" align="center">
+      <img src="{% static "Crawler/2.jpg" %}" style="width:850px;height:550px;">
+    </div>
+
+    <div class="item" align="center">
+      <img src="{% static "Crawler/4.jpg" %}" style="width:850px;height:550px;">
+    </div>
+
+    <div class="item" align="center">
+      <img src="{% static "Crawler/3.jpg" %}" style="width:850px;height:550px;">
+      <div class="carousel-caption">
+        <h3>We love swimming!</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+{% endblock %}
+</body>
+</html>

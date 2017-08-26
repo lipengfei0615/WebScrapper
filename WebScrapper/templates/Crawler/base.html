@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SwimmingRanking</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body{
+            background-color:lavender;
+        }
+    </style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse" style="margin-bottom:0px;" >
+   <div class="container-fluid">
+    <div class="navbar-header">
+	<img class="navbar-brand" src="{% static "Crawler/swimming.png" %}" style="width:50px;height:50px;">
+    <a  class="navbar-brand" href="{% url 'Crawler:home' %}">Swimming Rankings</a>
+    </div>
+       {% block myhdg %}
+    <ul class="nav navbar-nav" >
+      <li><a  href="{% url 'Crawler:home' %}">Home</a></li>
+      <li><a  href="{% url 'Crawler:athletes' %}">Athletes</a></li>
+      <li><a  href="{% url 'Crawler:recordlist' %}">Records</a></li>
+      <li><a  href="{% url 'Crawler:ranking' %}">Ranking</a></li>
+      <li><a  href="{% url 'Crawler:meet' %}">Meet</a></li>
+      <li><a  href="{% url 'Crawler:calender' %}">Calender</a> </li>
+    </ul>
+       {% endblock %}
+   </div>
+  </nav>
+
+{% block content %}{% endblock %}
+
+ <div class="footer navbar-inverse navbar-fixed-bottom">
+    <footer class="container-fluid text-center">
+        <h4><p style="color:white">Web Scraper@60-699 Project &nbsp; <a href="{% url 'Crawler:email' %}">Contact us</a></p></h4>
+    </footer>
+</div>
+</body>
+</html>

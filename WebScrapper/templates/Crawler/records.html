@@ -1,0 +1,51 @@
+{% extends 'Crawler/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Records</title>
+</head>
+<body>
+{% block myhdg %}
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'Crawler:home' %}">Home</a></li>
+      <li><a href="{% url 'Crawler:athletes' %}">Athletes</a></li>
+      <li class="active"><a href="{% url 'Crawler:recordlist' %}">Records</a></li>
+      <li><a href="{% url 'Crawler:ranking' %}">Ranking</a></li>
+      <li><a href="{% url 'Crawler:meet' %}">Meet</a></li>
+      <li><a href="{% url 'Crawler:calender' %}">Calender</a> </li>
+    </ul>
+{% endblock %}
+    {% block content %}
+        {% csrf_token %}
+        <div align="center"><h1>{{ recordname }}</h1></div>
+        <div>
+            <td>
+                <table class="recordList" cellspacing="0" cellpadding="0" border="0" width="1000" align="center">
+                <tr class="recordSearchHead">
+                <th width="200">Stroke</th>
+                <th width="200">Name</th>
+                <th width="100">Birth_year</th>
+                <th width="100">Club</th>
+                <th width="100">Time</th>
+                <th width="150">Date</th>
+                <th width="150">City</th>
+                </tr>
+                    {% for record in record %}
+                        <tr class="recordSearch">
+                            <th width="200"><p><span style="font-weight:normal">{{ record.stroke }}</span></p></th>
+                            <th width="200"><p><span style="font-weight:normal">{{ record.name }}</span></p></th>
+                            <th width="100"><p><span style="font-weight:normal">{{ record.birth_year }}</span></p></th>
+                            <th width="100"><p><span style="font-weight:normal">{{ record.club }}</span></p></th>
+                            <th width="100"><p><span style="font-weight:normal">{{ record.time }}</span></p></th>
+                            <th width="150"><p><span style="font-weight:normal">{{ record.date }}</span></p></th>
+                            <th width="150"><p><span style="font-weight:normal">{{ record.city }}</span></p></th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        <div>
+    {% endblock %}
+</body>
+</html>

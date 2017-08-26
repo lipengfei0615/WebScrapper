@@ -1,0 +1,58 @@
+{% extends 'Crawler/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meet</title>
+</head>
+<body>
+{% block myhdg %}
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'Crawler:home' %}">Home</a></li>
+      <li><a href="{% url 'Crawler:athletes' %}">Athletes</a></li>
+      <li><a href="{% url 'Crawler:recordlist' %}">Records</a></li>
+      <li><a href="{% url 'Crawler:ranking' %}">Ranking</a></li>
+      <li class="active"><a href="{% url 'Crawler:meet' %}">Meet</a></li>
+      <li><a href="{% url 'Crawler:calender' %}">Calender</a> </li>
+    </ul>
+{% endblock %}
+    {% block content %}
+        <div align="center" >
+            <form id="myform" method="POST" action="">{% csrf_token %}
+                <table>
+                    <tr><td>
+                        <select id="meet_type" name="meet_type">
+                            <option value="">Please Select Meet Type</option>
+                            {% for typedic in typedic %}
+                            <option value="{{ typedic.meet_type }}">{{ typedic.meet_type }}</option>
+                            {% endfor %}
+                        </select>&nbsp&nbsp&nbsp
+                        <input type="submit" value="Search by Conditions"/>
+                    </td></tr>
+                </table>
+            </form>
+        </div>
+        <div>
+            <td>
+                <table class="MeetList" cellspacing="0" cellpadding="0" border="0" width="600" align="center">
+                <tr class="meetSearchHead">
+                <th width="100">Course</th>
+                    <th width="150">Date</th>
+                 <th width="250">Meet Name</th>
+                <th width="100">City</th>
+                </tr>
+                    {% for meet in meet %}
+                        <tr class="meetSearch">
+                            <th width="100" class="course"><p><span style="font-weight:normal">{{ meet.course }}</span></p></th>
+                            <th width="150" class="date"><p><span style="font-weight:normal">{{ meet.date }}</span></p></th>
+                            <th width="250" class="meet_name"><p><span style="font-weight:normal"><a href="{{ meet.meets_id }}">{{ meet.meet_name }}</a></span></p></th>
+                            <th width="100" class="city"><p><span style="font-weight:normal">{{ meet.city }}</span></p></th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </div>
+    {% endblock %}
+</body>
+</html>

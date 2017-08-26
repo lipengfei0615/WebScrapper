@@ -1,0 +1,97 @@
+{% extends 'Crawler/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ranking</title>
+
+</head>
+<body>
+{% block myhdg %}
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'Crawler:home' %}">Home</a></li>
+      <li><a href="{% url 'Crawler:athletes' %}">Athletes</a></li>
+      <li><a href="{% url 'Crawler:recordlist' %}">Records</a></li>
+      <li class="active"><a href="{% url 'Crawler:ranking' %}">Ranking</a></li>
+      <li><a href="{% url 'Crawler:meet' %}">Meet</a></li>
+      <li><a href="{% url 'Crawler:calender' %}">Calender</a></li>
+    </ul>
+{% endblock %}
+    {% block content %}
+
+        <div align="center" >
+            <form id="myform" method="POST" action="{% url 'Crawler:rankingcondition' %}" onSubmit="javascript:return isEmpty();">{% csrf_token %}
+                <table>
+                    <tr><td>
+                        <select id="course" name="course" >
+                            <option value="">---   Please Select Course   ---</option>
+                            {% for coursedic in coursedic %}
+                            <option value="{{ coursedic.course }}">{{ coursedic.course }}</option>
+                            {% endfor %}
+                        </select>&nbsp&nbsp&nbsp
+
+                        <select id="gender" name="gender">
+                            <option value="">---   Please Select Gender   ---</option>
+                            {% for genderdic in genderdic %}
+                            <option value="{{ genderdic.gender }}" >{{ genderdic.gender }}</option>
+                            {% endfor %}
+                        </select>&nbsp&nbsp&nbsp
+
+                        <select id="ranking_year" name="ranking_year">
+                            <option value="">---   Please Select Year   ---</option>
+                            {% for yeardic in yeardic %}
+                            <option value="{{ yeardic.ranking_year }}" >{{ yeardic.ranking_year }}</option>
+                            {% endfor %}
+                        </select>&nbsp&nbsp&nbsp
+                        <input type="submit" value="Search by Conditions"/>
+                    </td></tr>
+                </table>
+            </form>
+        </div>
+        <script type="text/javascript">
+        function isEmpty() {
+            var course=$('#course').val();
+            var gender=$('#gender').val();
+            var year=$('#ranking_year').val();
+            if ((course === '')|| (gender ==='')|| (year ==='')){
+                alert("Please select every condition!");
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    </script>
+
+        <div>
+            <td>
+                <table class="rankingList" cellspacing="0" cellpadding="0" border="0" width="1000" align="center">
+                <tr class="rankingSearchHead">
+                <th width="100">Individuals</th>
+                <th width="150">Name</th>
+                <th width="100">Birth_year</th>
+                <th width="100">Nation</th>
+                <th width="100">Time</th>
+                <th width="50">Points</th>
+                <th width="200">Date</th>
+                <th width="200">City</th>
+                </tr>
+                    {% for rank in ranking %}
+                        <tr class="rankingSearch">
+                            <th width="100"><p><span style="font-weight:normal">{{ rank.individuals }}</span></p></th>
+                            <th width="150"><p><span style="font-weight:normal">{{ rank.name }}</span></p></th>
+                            <th width="100"><p><span style="font-weight:normal">{{ rank.birth_year }}</span></p></th>
+                            <th width="100"><p><span style="font-weight:normal">{{ rank.nation }}</span></p></th>
+                            <th width="100"><p><span style="font-weight:normal">{{ rank.time }}</span></p></th>
+                            <th width="50"><p><span style="font-weight:normal">{{ rank.points }}</span></p></th>
+                            <th width="200"><p><span style="font-weight:normal">{{ rank.date }}</span></p></th>
+                            <th width="200"><p><span style="font-weight:normal">{{ rank.city }}</span></p></th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </div>
+    {% endblock %}
+</body>
+</html>
