@@ -8,5 +8,6 @@ The scraper.py file is applied with beautifulsoup as scrape tool.
 
 Database: MySQL(swimming.sql), which consists of 8 tables categorized by modules.
 
-The front-end use bootstrap and javascript
+The front-end use bootstrap and javascript.
+
 The back-end use django architecture.
